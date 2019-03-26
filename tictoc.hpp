@@ -1,6 +1,8 @@
 #ifndef TICTOC_HPP
 #define TICTOC_HPP
 
+#ifdef WITH_TICTOC
+
 #include <sys/time.h>
 
 #include <map>
@@ -46,7 +48,7 @@ public:
             for (auto it = this->time_queue_.rbegin(); it != this->time_queue_.rend(); ++ it) {
                 if (it->type == TIC) {
                     auto tic_time = it->time;
-                    printf("%s [%5d,%5d]   elapse: %10.3f s  %10.3f ms  %10d us\n",
+                    printf("%s [%5d,%5d]   elapsed: %10.3f s  %10.3f ms  %10d us\n",
                         this->filename_.c_str(), it->line, line,
                         ((time.tv_sec - tic_time.tv_sec) + (time.tv_usec - tic_time.tv_usec) / 1000000.0),
                         ((time.tv_sec - tic_time.tv_sec) * 1000. +  (time.tv_usec - tic_time.tv_usec) / 1000.0),
@@ -65,6 +67,9 @@ public:
         this->toc(line, time);
         this->tic(line, time);
     };
+    void set_display(bool display) {
+        this->display_ = display;
+    }
 
 public:
     std::string filename_;
@@ -89,9 +94,11 @@ public:
         }
         TimerManager::timer_map[filename] = std::make_shared<Timer>(filename, display, max_hist_length);
     }
-    
-    static bool has(std::string filename) {
-        return TimerManager::timer_map.find(filename) != TimerManager::timer_map.end();
+
+    static void set_display(bool display) {
+        for (auto p: TimerManager::timer_map) {
+            p.second->set_display(display);
+        }
     }
 
     static void tic(std::string filename, line_id line) {
@@ -121,9 +128,20 @@ std::map<std::string, std::shared_ptr<Timer> > TimerManager::timer_map;
 
 }
 
+#endif
 
+#ifdef WITH_TICTOC
+#define TICTOC_DISPLAY med::TimerManager::set_display(true);
+#define TICTOC_NODISPLAY med::TimerManager::set_display(false);
 #define TIC med::TimerManager::init(__FILE__);med::TimerManager::tic(__FILE__, __LINE__);
 #define TOC med::TimerManager::init(__FILE__);med::TimerManager::toc(__FILE__, __LINE__);
 #define TICTOC med::TimerManager::init(__FILE__);med::TimerManager::tictoc(__FILE__, __LINE__);
+#else
+#define TICTOC_DISPLAY
+#define TICTOC_NODISPLAY
+#define TIC
+#define TOC
+#define TICTOC
+#endif
 
 #endif
