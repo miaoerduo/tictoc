@@ -21,15 +21,15 @@ g++ demo.cpp -o demo.bin -std=c++11 -DWITH_TICTOP
 You will get the output as following:
 
 ```
-demo.cpp [    8,   13]   elapsed:      0.026 s      26.460 ms       26460 us
-demo.cpp [    8,   18]   elapsed:      0.048 s      48.282 ms       48282 us
-demo.cpp [    8,   23]   elapsed:      0.071 s      70.769 ms       70769 us
-demo.cpp [    8,   24]   elapsed:      0.071 s      70.782 ms       70782 us
-demo.cpp [   30,   36]   elapsed:      0.021 s      20.804 ms       20804 us
-demo.cpp [   36,   41]   elapsed:      0.021 s      21.212 ms       21212 us
+demo.cpp @ main [    8,   13]   elapsed:      0.025 s      24.786 ms       24786 us
+demo.cpp @ main [    8,   18]   elapsed:      0.049 s      48.709 ms       48709 us
+demo.cpp @ main [    8,   23]   elapsed:      0.072 s      72.211 ms       72211 us
+demo.cpp @ main [    8,   24]   elapsed:      0.072 s      72.225 ms       72225 us
+demo.cpp @ main [   30,   36]   elapsed:      0.022 s      21.747 ms       21747 us
+demo.cpp @ main [   36,   41]   elapsed:      0.021 s      21.463 ms       21463 us
 ```
 
-The output contains: filename, code lines and elapsed time.
+The output contains: filename, function, code lines and elapsed time.
 
 And if you compile demo.cpp without `-DWITH_TICTOP`, the program will work as if tictoc timer never existed!
 
@@ -40,6 +40,6 @@ g++ demo.cpp -o demo.bin -std=c++11 # -DWITH_TICTOP
 
 No output!
 
-Macro definition `TICTOC_DISPLAY` and `TICTOC_NODISPLAY` can be used to turn the timer on / off.
+Macro definitions `TICTOC_DISPLAY` and `TICTOC_NODISPLAY` can be used to turn the timer on / off.
 
 All features can be found in `demo.cpp`, Please run the demo first. :P

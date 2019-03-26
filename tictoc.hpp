@@ -131,11 +131,12 @@ std::map<std::string, std::shared_ptr<Timer> > TimerManager::timer_map;
 #endif
 
 #ifdef WITH_TICTOC
+#define LOCATION std::string(__FILE__) + " @ " + std::string(__FUNCTION__)
 #define TICTOC_DISPLAY med::TimerManager::set_display(true);
 #define TICTOC_NODISPLAY med::TimerManager::set_display(false);
-#define TIC med::TimerManager::init(__FILE__);med::TimerManager::tic(__FILE__, __LINE__);
-#define TOC med::TimerManager::init(__FILE__);med::TimerManager::toc(__FILE__, __LINE__);
-#define TICTOC med::TimerManager::init(__FILE__);med::TimerManager::tictoc(__FILE__, __LINE__);
+#define TIC med::TimerManager::init(LOCATION);med::TimerManager::tic(LOCATION, __LINE__);
+#define TOC med::TimerManager::init(LOCATION);med::TimerManager::toc(LOCATION, __LINE__);
+#define TICTOC med::TimerManager::init(LOCATION);med::TimerManager::tictoc(LOCATION, __LINE__);
 #else
 #define TICTOC_DISPLAY
 #define TICTOC_NODISPLAY
