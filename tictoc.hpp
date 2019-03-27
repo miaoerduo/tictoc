@@ -10,8 +10,9 @@
 #include <memory>
 #include <tuple>
 
-namespace med {
+namespace {
 
+namespace med {
 
 // Gets current time down to microseconds
 struct timeval get_tick() {
@@ -126,6 +127,7 @@ public:
 
 std::map<std::string, std::shared_ptr<Timer> > TimerManager::timer_map;
 
+}
 }
 
 #endif
