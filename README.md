@@ -14,7 +14,7 @@ Please run the demo first!
 compile the demo.cpp and run:
 
 ```
-g++ demo.cpp -o demo.bin -std=c++11 -DWITH_TICTOP
+g++ demo.cpp -o demo.bin -DWITH_TICTOP
 ./demo.bin
 ```
 
@@ -34,7 +34,7 @@ The output contains: filename, function, code lines and elapsed time.
 And if you compile demo.cpp without `-DWITH_TICTOP`, the program will work as if tictoc timer never existed!
 
 ```
-g++ demo.cpp -o demo.bin -std=c++11 # -DWITH_TICTOP
+g++ demo.cpp -o demo.bin # -DWITH_TICTOP
 ./demo.bin
 ```
 
